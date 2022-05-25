@@ -1,4 +1,4 @@
-
+import TestData.constant as const
 import os, time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -10,7 +10,7 @@ from selenium.common.exceptions import NoSuchElementException
 os.environ['Path'] += r"C:/HudlProject1/driver"                     # environment path where the driver is located
 driver = webdriver.Chrome()
 
-driver.get("https://hudl.com/")                                             # HUDL home page url
+driver.get(const.Base_url)                                             # HUDL home page url
 driver.find_element(By.XPATH, "//a[normalize-space()='Log in']").click()    # hit Login button to enter credential
 
 time.sleep(1)
@@ -49,12 +49,12 @@ password = driver.find_element(By.XPATH, "//input[@id='password']")
 # insert credentials using the relative xpath
 
 ###############   negative scenario, hitting enter without entering pwd  ##################
-email.send_keys("islamashiqul87@gmail.com", Keys.ENTER)
+email.send_keys(const.email, Keys.ENTER)
 time.sleep(2)
 
 ###############   negative scenario, entering negative credential  ##################33
 email.clear()
-email.send_keys("islamashiqul87@gmail.com")
+email.send_keys(const.email)
 driver.implicitly_wait(500)
 password.send_keys("Aminul012", Keys.ENTER)
 time.sleep(2)
@@ -62,10 +62,10 @@ time.sleep(2)
 ###############   positive scenario   ##################33
 # insert credentials using the relative xpath
 email.clear()
-email.send_keys("islamashiqul87@gmail.com")
+email.send_keys(const.email)
 driver.implicitly_wait(500)
 password.clear()
-password.send_keys("Aminul0123")
+password.send_keys(const.password)
 
 # instead of hitting the Login button, we can trigger keyboard Enter button
 # driver.find_element(By.XPATH, "//input[@id='password']").send_keys("Aminul0123" + Keys.ENTER)
